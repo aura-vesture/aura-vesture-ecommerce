@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Support Request #{{ticket_id}} - {{app_name}}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            background: linear-gradient(to right, #626766, #909D9B, #A2B2B6);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .content {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 5px;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 12px;
+            color: #666666;
+        }
+        .ticket-info {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .message-content {
+            background-color: #e9ecef;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+            white-space: pre-wrap;
+            font-family: monospace;
+        }
+        .urgency {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .urgency-urgent {
+            background-color: #dc3545;
+            color: white;
+        }
+        .urgency-high {
+            background-color: #ffc107;
+            color: #000;
+        }
+        .urgency-normal {
+            background-color: #0dcaf0;
+            color: #000;
+        }
+        .urgency-low {
+            background-color: #6c757d;
+            color: white;
+        }
+        .user-info {
+            background-color: #e2e3e5;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .action-required {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .checklist {
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+            color: #856404;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .button {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #626766;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .security-warning {
+            background-color: #dc3545;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {{#if is_security}}
+        <div class="security-warning">
+            ⚠️ SECURITY ISSUE - IMMEDIATE ATTENTION REQUIRED ⚠️
+        </div>
+        {{/if}}
+
+        <div class="header">
+            <h1>New Support Request</h1>
+            <p style="font-size: 1.2em; margin: 0;">Ticket #{{ticket_id}}</p>
+        </div>
+
+        <div class="content">
+            <div class="ticket-info">
+                <h3>Ticket Details</h3>
+                <p>
+                    <strong>Urgency:</strong> 
+                    <span class="urgency urgency-{{urgency}}">{{urgency}}</span>
+                </p>
+                <p><strong>Category:</strong> {{category}}</p>
+                <p><strong>Subject:</strong> {{subject}}</p>
+                <p><strong>Submitted:</strong> {{created_at}}</p>
+            </div>
+
+            <div class="user-info">
+                <h3>User Information</h3>
+                <table style="width: 100%;">
+                    <tr>
+                        <td><strong>Name:</strong></td>
+                        <td>{{name}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Email:</strong></td>
+                        <td>{{email}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>User ID:</strong></td>
+                        <td>{{#if user_id}}{{user_id}}{{else}}Not logged in{{/if}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>IP Address:</strong></td>
+                        <td>{{ip_address}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>User Agent:</strong></td>
+                        <td style="font-size: 0.9em;">{{user_agent}}</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="message-content">
+                <h3>Message</h3>
+                {{message}}
+            </div>
+
+            {{#if is_security}}
+            <div class="action-required">
+                <h3>🚨 Security Protocol Checklist</h3>
+                <ul>
+                    <li>Review user's recent activity and login history</li>
+                    <li>Check for suspicious login attempts or failed 2FA verifications</li>
+                    <li>Verify user's identity through secondary channels</li>
+                    <li>Document all actions taken in the security log</li>
+                    <li>Consider temporary account restrictions if necessary</li>
+                    <li>Update security team in the incident tracking system</li>
+                </ul>
+            </div>
+            {{/if}}
+
+            <div class="checklist">
+                <h3>Response Guidelines</h3>
+                <ul>
+                    <li><strong>Response Time Target:</strong>
+                        {{#if urgency_urgent}}Within 1 hour{{/if}}
+                        {{#if urgency_high}}Within 4 hours{{/if}}
+                        {{#if urgency_normal}}Within 24 hours{{/if}}
+                        {{#if urgency_low}}Within 48 hours{{/if}}
+                    </li>
+                    <li>Review previous tickets from this user</li>
+                    <li>Verify account status and permissions</li>
+                    <li>Check for related known issues</li>
+                    <li>Update ticket status when starting work</li>
+                </ul>
+            </div>
+
+            <div style="text-align: center;">
+                <a href="{{app_url}}/admin/support/ticket/{{ticket_id}}" class="button">
+                    View Ticket in Dashboard
+                </a>
+            </div>
+
+            <p style="font-size: 0.9em; color: #666;">
+                <strong>Note:</strong> This ticket has been automatically assigned based on category and urgency. 
+                Reassign if needed based on workload and expertise.
+            </p>
+        </div>
+
+        <div class="footer">
+            <p>&copy; {{current_year}} {{app_name}} Support System</p>
+            <p style="color: #dc3545;">
+                INTERNAL COMMUNICATION - DO NOT FORWARD
+            </p>
+            <p>
+                <small>
+                    Support Team Access Portal: <a href="{{app_url}}/admin">{{app_url}}/admin</a>
+                </small>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
