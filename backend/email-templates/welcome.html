@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to {{app_name}}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            background: linear-gradient(to right, #626766, #909D9B, #A2B2B6);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .content {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 5px;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 12px;
+            color: #666666;
+        }
+        .button {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #626766;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Welcome to {{app_name}}</h1>
+        </div>
+        <div class="content">
+            <h2>Hello {{first_name}},</h2>
+            <p>Thank you for creating an account with {{app_name}}. We're excited to have you join our community of fashion enthusiasts!</p>
+            <p>With your new account, you can:</p>
+            <ul>
+                <li>Browse our exclusive collection</li>
+                <li>Track your orders</li>
+                <li>Save your favorite items</li>
+                <li>Get early access to sales</li>
+            </ul>
+            <div style="text-align: center;">
+                <a href="{{app_url}}/login" class="button">Start Shopping</a>
+            </div>
+            <p>If you have any questions, feel free to contact our support team.</p>
+            <p>Best regards,<br>The {{app_name}} Team</p>
+        </div>
+        <div class="footer">
+            <p>&copy; {{current_year}} {{app_name}}. All rights reserved.</p>
+            <p>This email was sent to {{email}}</p>
+        </div>
+    </div>
+</body>
+</html>
