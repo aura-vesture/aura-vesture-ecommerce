@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Response to Your Support Ticket - {{app_name}}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            background: linear-gradient(to right, #626766, #909D9B, #A2B2B6);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .content {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 5px;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 12px;
+            color: #666666;
+        }
+        .ticket-info {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .response-content {
+            background-color: #e9ecef;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+            white-space: pre-wrap;
+        }
+        .button {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #626766;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .status-open {
+            background-color: #0dcaf0;
+            color: #000;
+        }
+        .status-in-progress {
+            background-color: #ffc107;
+            color: #000;
+        }
+        .status-resolved {
+            background-color: #198754;
+            color: #fff;
+        }
+        .status-closed {
+            background-color: #6c757d;
+            color: #fff;
+        }
+        .responder-info {
+            background-color: #e2e3e5;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .support-badge {
+            display: inline-block;
+            padding: 2px 6px;
+            background-color: #0d6efd;
+            color: white;
+            border-radius: 3px;
+            font-size: 12px;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>New Response to Your Support Ticket</h1>
+            <p style="font-size: 1.2em; margin: 0;">Ticket #{{ticket_id}}</p>
+        </div>
+        <div class="content">
+            <h2>Hello {{recipient_name}},</h2>
+            
+            <p>There's a new response to your support ticket regarding "{{ticket_subject}}".</p>
+
+            <div class="ticket-info">
+                <h3>Ticket Details</h3>
+                <p><strong>Status:</strong> 
+                    <span class="status-badge status-{{ticket_status}}">
+                        {{ticket_status}}
+                    </span>
+                </p>
+                <p><strong>Category:</strong> {{ticket_category}}</p>
+                <p><strong>Last Updated:</strong> {{last_updated}}</p>
+            </div>
+
+            <div class="responder-info">
+                <p>
+                    <strong>Response from:</strong> 
+                    {{responder_name}}
+                    {{#if is_support}}
+                    <span class="support-badge">Support Team</span>
+                    {{/if}}
+                </p>
+                <p><strong>Time:</strong> {{response_time}}</p>
+            </div>
+
+            <div class="response-content">
+                {{response_content}}
+            </div>
+
+            {{#if status_changed}}
+            <div style="background-color: #fff3cd; padding: 15px; border-radius: 5px; margin: 20px 0;">
+                <p style="margin: 0;">
+                    <strong>Note:</strong> The status of your ticket has been updated to 
+                    <span class="status-badge status-{{ticket_status}}">{{ticket_status}}</span>
+                </p>
+            </div>
+            {{/if}}
+
+            <div style="text-align: center;">
+                <a href="{{app_url}}/support/tickets/{{ticket_id}}" class="button">
+                    View Ticket & Respond
+                </a>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <p><strong>Quick Tips:</strong></p>
+                <ul>
+                    <li>Click the button above to view the full ticket history and add your response</li>
+                    <li>You can update your notification preferences in your account settings</li>
+                    <li>For urgent matters, you can escalate the ticket through the support portal</li>
+                </ul>
+            </div>
+
+            <p>Best regards,<br>The {{app_name}} Support Team</p>
+        </div>
+        <div class="footer">
+            <p>&copy; {{current_year}} {{app_name}}. All rights reserved.</p>
+            <p>This email was sent to {{recipient_email}}</p>
+            <p>
+                <small>
+                    You're receiving this email because you have an active support ticket. 
+                    You can manage your notification preferences in your 
+                    <a href="{{app_url}}/settings/notifications">account settings</a>.
+                </small>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
