@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚠️ Low Rating Alert - Ticket #{{ticket_id}} - {{app_name}}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            background: linear-gradient(to right, #dc3545, #bb2d3b);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .content {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 5px;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 12px;
+            color: #666666;
+        }
+        .alert-box {
+            background-color: #f8d7da;
+            border: 1px solid #f5c2c7;
+            color: #842029;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .rating-display {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+        .stars {
+            color: #dc3545;
+            font-size: 24px;
+            letter-spacing: 4px;
+        }
+        .satisfaction-box {
+            background-color: #e2e3e5;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .button {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #dc3545;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .checklist {
+            background-color: #fff3cd;
+            border: 1px solid #ffecb5;
+            color: #664d03;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .comments-box {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+            white-space: pre-wrap;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚠️ Low Rating Alert</h1>
+            <p style="font-size: 1.2em; margin: 0;">Immediate Attention Required</p>
+        </div>
+        <div class="content">
+            <div class="alert-box">
+                <h2 style="margin-top: 0;">Low Rating Received</h2>
+                <p>A customer has submitted a low rating for their support experience.</p>
+                <p><strong>Ticket:</strong> #{{ticket_id}}</p>
+                <p><strong>Time:</strong> {{submission_time}}</p>
+            </div>
+
+            <div class="rating-display">
+                <h3>Customer Rating</h3>
+                <div class="stars">
+                    {{#each rating_stars}}★{{/each}}{{#each empty_stars}}☆{{/each}}
+                </div>
+                <p style="color: #666; font-size: 14px;">{{rating}}/5 stars</p>
+            </div>
+
+            <div class="satisfaction-box">
+                <h3>Satisfaction Areas</h3>
+                <table style="width: 100%;">
+                    {{#each satisfaction}}
+                    <tr>
+                        <td>{{@key}}</td>
+                        <td style="text-align: right;">
+                            {{#if this}}✅{{else}}❌{{/if}}
+                        </td>
+                    </tr>
+                    {{/each}}
+                </table>
+            </div>
+
+            <div class="comments-box">
+                <h3>Customer Comments</h3>
+                <p style="margin: 0;">{{comments}}</p>
+            </div>
+
+            <div class="checklist">
+                <h3 style="margin-top: 0;">Required Actions</h3>
+                <ol style="margin-bottom: 0;">
+                    <li>Review the ticket history immediately</li>
+                    <li>Analyze the areas of dissatisfaction</li>
+                    <li>Contact the customer within 4 hours</li>
+                    <li>Prepare an action plan for resolution</li>
+                    <li>Document findings and actions taken</li>
+                </ol>
+            </div>
+
+            <div style="text-align: center;">
+                <a href="{{app_url}}/admin/tickets/{{ticket_id}}" class="button">
+                    Review Ticket Now
+                </a>
+            </div>
+
+            <div style="margin-top: 30px;">
+                <h3>Ticket Timeline</h3>
+                <table style="width: 100%; border-collapse: collapse;">
+                    <tr>
+                        <td><strong>Created:</strong></td>
+                        <td>{{created_at}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>First Response:</strong></td>
+                        <td>{{first_response_time}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Resolution Time:</strong></td>
+                        <td>{{resolution_time}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Support Agent:</strong></td>
+                        <td>{{agent_name}}</td>
+                    </tr>
+                </table>
+            </div>
+
+            <p style="margin-top: 30px; color: #dc3545;">
+                <strong>Note:</strong> This requires immediate attention to maintain our service quality standards.
+            </p>
+        </div>
+        <div class="footer">
+            <p>&copy; {{current_year}} {{app_name}} Support Management</p>
+            <p>INTERNAL COMMUNICATION - DO NOT FORWARD</p>
+            <p>
+                <small>
+                    Support Management Portal: <a href="{{app_url}}/admin">{{app_url}}/admin</a>
+                </small>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
