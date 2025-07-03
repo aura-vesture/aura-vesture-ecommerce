@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Was Our Support? - {{app_name}}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            background: linear-gradient(to right, #626766, #909D9B, #A2B2B6);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .content {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 5px;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 12px;
+            color: #666666;
+        }
+        .ticket-info {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .rating-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .rating-buttons {
+            display: inline-block;
+            margin: 20px 0;
+        }
+        .rating-button {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            line-height: 60px;
+            margin: 0 5px;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 24px;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+        .rating-button:hover {
+            transform: scale(1.1);
+        }
+        .rating-1 {
+            background-color: #dc3545;
+            color: white;
+        }
+        .rating-2 {
+            background-color: #ffc107;
+            color: black;
+        }
+        .rating-3 {
+            background-color: #0dcaf0;
+            color: black;
+        }
+        .rating-4 {
+            background-color: #198754;
+            color: white;
+        }
+        .rating-5 {
+            background-color: #198754;
+            color: white;
+        }
+        .button {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #626766;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .resolved-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            background-color: #198754;
+            color: white;
+            border-radius: 12px;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>How Was Our Support?</h1>
+            <p style="font-size: 1.2em; margin: 0;">We Value Your Feedback</p>
+        </div>
+        <div class="content">
+            <h2>Hello {{recipient_name}},</h2>
+            
+            <p>Your support ticket has been resolved, and we'd love to hear about your experience with our support team.</p>
+
+            <div class="ticket-info">
+                <h3>Ticket Details</h3>
+                <table style="width: 100%;">
+                    <tr>
+                        <td><strong>Ticket ID:</strong></td>
+                        <td>#{{ticket_id}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Subject:</strong></td>
+                        <td>{{ticket_subject}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Status:</strong></td>
+                        <td><span class="resolved-badge">Resolved</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Resolved On:</strong></td>
+                        <td>{{resolved_date}}</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="rating-container">
+                <h3>How would you rate your support experience?</h3>
+                <p>Click a rating to provide your feedback:</p>
+                <div class="rating-buttons">
+                    <a href="{{feedback_url}}&rating=1" class="rating-button rating-1">1</a>
+                    <a href="{{feedback_url}}&rating=2" class="rating-button rating-2">2</a>
+                    <a href="{{feedback_url}}&rating=3" class="rating-button rating-3">3</a>
+                    <a href="{{feedback_url}}&rating=4" class="rating-button rating-4">4</a>
+                    <a href="{{feedback_url}}&rating=5" class="rating-button rating-5">5</a>
+                </div>
+                <p style="color: #666;">
+                    1 = Very Unsatisfied, 5 = Very Satisfied
+                </p>
+            </div>
+
+            <div style="text-align: center;">
+                <p>Or click below to provide more detailed feedback:</p>
+                <a href="{{feedback_url}}" class="button">
+                    Share Your Feedback
+                </a>
+            </div>
+
+            <div style="margin-top: 30px;">
+                <h3>Why Your Feedback Matters</h3>
+                <p>Your feedback helps us:</p>
+                <ul>
+                    <li>Improve our support quality</li>
+                    <li>Train our support team better</li>
+                    <li>Enhance our products and services</li>
+                    <li>Provide better solutions for future customers</li>
+                </ul>
+            </div>
+
+            <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px; margin: 20px 0;">
+                <p style="margin: 0;">
+                    <strong>Need more help?</strong> If you're not completely satisfied with the resolution, 
+                    you can reopen this ticket or create a new one through our support portal.
+                </p>
+            </div>
+
+            <p>Thank you for choosing {{app_name}}!</p>
+
+            <p>Best regards,<br>The {{app_name}} Support Team</p>
+        </div>
+        <div class="footer">
+            <p>&copy; {{current_year}} {{app_name}}. All rights reserved.</p>
+            <p>This email was sent to {{recipient_email}}</p>
+            <p>
+                <small>
+                    You're receiving this email because you recently had a support interaction with us. 
+                    You can manage your notification preferences in your 
+                    <a href="{{app_url}}/settings/notifications">account settings</a>.
+                </small>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
