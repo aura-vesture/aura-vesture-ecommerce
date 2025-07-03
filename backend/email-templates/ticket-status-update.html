@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support Ticket Status Update - {{app_name}}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            background: linear-gradient(to right, #626766, #909D9B, #A2B2B6);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .content {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 5px;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 12px;
+            color: #666666;
+        }
+        .status-update {
+            text-align: center;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        .status-open {
+            background-color: #cff4fc;
+            color: #055160;
+        }
+        .status-in-progress {
+            background-color: #fff3cd;
+            color: #664d03;
+        }
+        .status-pending {
+            background-color: #ffe5d0;
+            color: #7c2d12;
+        }
+        .status-resolved {
+            background-color: #d1e7dd;
+            color: #0f5132;
+        }
+        .status-closed {
+            background-color: #e2e3e5;
+            color: #41464b;
+        }
+        .ticket-info {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .button {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #626766;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .timeline {
+            margin: 20px 0;
+            padding: 0;
+            list-style: none;
+            position: relative;
+        }
+        .timeline:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 15px;
+            height: 100%;
+            width: 2px;
+            background: #e9ecef;
+        }
+        .timeline-item {
+            position: relative;
+            padding-left: 40px;
+            padding-bottom: 20px;
+        }
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #626766;
+        }
+        .note-box {
+            background-color: #e2e3e5;
+            border: 1px solid #d6d8db;
+            color: #383d41;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Ticket Status Update</h1>
+            <p style="font-size: 1.2em; margin: 0;">Ticket #{{ticket_id}}</p>
+        </div>
+        <div class="content">
+            <h2>Hello {{recipient_name}},</h2>
+            
+            <div class="status-update status-{{new_status}}">
+                <h3 style="margin-top: 0;">Your ticket status has been updated to:</h3>
+                <p style="font-size: 24px; font-weight: bold; margin: 10px 0;">
+                    {{new_status_display}}
+                </p>
+            </div>
+
+            <div class="ticket-info">
+                <h3>Ticket Details</h3>
+                <table style="width: 100%;">
+                    <tr>
+                        <td><strong>Subject:</strong></td>
+                        <td>{{ticket_subject}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Category:</strong></td>
+                        <td>{{ticket_category}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Updated:</strong></td>
+                        <td>{{update_time}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Updated By:</strong></td>
+                        <td>{{updated_by}}</td>
+                    </tr>
+                </table>
+            </div>
+
+            {{#if status_note}}
+            <div class="note-box">
+                <strong>Note from Support:</strong>
+                <p style="margin: 10px 0 0 0;">{{status_note}}</p>
+            </div>
+            {{/if}}
+
+            <div class="timeline">
+                <h3>Status History</h3>
+                {{#each status_history}}
+                <div class="timeline-item">
+                    <p><strong>{{status}}</strong></p>
+                    <p style="color: #666; margin: 0;">{{date}}</p>
+                </div>
+                {{/each}}
+            </div>
+
+            {{#if next_steps}}
+            <div style="background-color: #fff3cd; padding: 15px; border-radius: 5px; margin: 20px 0;">
+                <h3 style="margin-top: 0;">Next Steps</h3>
+                <ul style="margin-bottom: 0;">
+                    {{#each next_steps}}
+                    <li>{{this}}</li>
+                    {{/each}}
+                </ul>
+            </div>
+            {{/if}}
+
+            <div style="text-align: center;">
+                <a href="{{app_url}}/support/tickets/{{ticket_id}}" class="button">
+                    View Ticket Details
+                </a>
+            </div>
+
+            {{#if is_resolved}}
+            <div style="margin-top: 20px;">
+                <h3>How was your experience?</h3>
+                <p>We'd love to hear your feedback about our support service. Please take a moment to rate your experience:</p>
+                <div style="text-align: center;">
+                    <a href="{{feedback_url}}" class="button" style="background-color: #198754;">
+                        Rate Your Experience
+                    </a>
+                </div>
+            </div>
+            {{/if}}
+
+            <p>Best regards,<br>The {{app_name}} Support Team</p>
+        </div>
+        <div class="footer">
+            <p>&copy; {{current_year}} {{app_name}}. All rights reserved.</p>
+            <p>This email was sent to {{recipient_email}}</p>
+            <p>
+                <small>
+                    You're receiving this email because you have an active support ticket. 
+                    You can manage your notification preferences in your 
+                    <a href="{{app_url}}/settings/notifications">account settings</a>.
+                </small>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
